@@ -1,14 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import InputField from "./InputFiled";
 import { useState } from "react";
 import { login } from "../service/service";
 
-const SignIn = () => {
+const SignIn = ({setIsAuthenticated}) => {
 
     const [formData, setFormData] = useState({
         userName: '',
         password: ''
     })
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +25,8 @@ const SignIn = () => {
         try {
             const res = await login(formData);
             console.log(res);
+            setIsAuthenticated(true)
+            navigate("/home")
         } catch (e) {
             if (e.response.status === 400){
                 console.log(e.response.data)

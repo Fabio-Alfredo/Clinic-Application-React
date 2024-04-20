@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import InputField from "./InputFiled";
 import { GiFastBackwardButton } from "react-icons/gi";
 import { useState } from "react";
@@ -12,6 +12,8 @@ const SignUp = () => {
         password: '',
         passwordConf: ''
     })
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -34,6 +36,7 @@ const SignUp = () => {
         try {
             const res = await register(formData)
             console.log(res)
+            navigate('/')
         } catch (e) {
             alert(e.response.data);
         }
