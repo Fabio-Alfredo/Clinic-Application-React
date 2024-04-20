@@ -12,8 +12,9 @@ export const register = async (formData) => {
 
         return res.data;
     } catch (error) {
+        
         console.error('Error al realizar la petición:', error);
-        throw new Error("Error occurred while creating the movie. Please try again.");
+        throw error
     }
 }
 
@@ -27,6 +28,7 @@ export const login = async (formData) => {
 
         return res.data;
     } catch (error) {
+        console.error('Error al realizar la petición:', error);
         throw error;
     }
 }

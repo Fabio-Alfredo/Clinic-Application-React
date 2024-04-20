@@ -25,7 +25,8 @@ const SignIn = () => {
             const res = await login(formData);
             console.log(res);
         } catch (e) {
-            if (e.response.status === 400) {
+            if (e.response.status === 400){
+                console.log(e.response.data)
                 alert(e.response.data);
             } 
         }
