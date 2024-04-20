@@ -6,7 +6,7 @@ import { login } from "../service/service";
 const SignIn = ({setIsAuthenticated}) => {
 
     const [formData, setFormData] = useState({
-        userName: '',
+        identifier: '',
         password: ''
     })
     const navigate = useNavigate();
@@ -27,6 +27,7 @@ const SignIn = ({setIsAuthenticated}) => {
             console.log(res);
             localStorage.setItem("isAuthenticated", "true");
             setIsAuthenticated(true)
+
             navigate("/home")
         } catch (e) {
             if (e.response.status === 400){
@@ -44,7 +45,7 @@ const SignIn = ({setIsAuthenticated}) => {
                         Sign In
                     </p>
                     <form className="flex flex-col gap-5 w-4/5 3xl:w-3/4 items-center" onSubmit={handleSubmit} >
-                        <InputField nameField="Username" inputName={"userName"} type="text" placeH="e.g. NimbusX" inputValue={formData.userName} inputOnchage={handleInputChange} />
+                        <InputField nameField="Username or Email" inputName={"identifier"} type="text" placeH="e.g. NimbusX" inputValue={formData.identifier} inputOnchage={handleInputChange} />
                         <InputField nameField="Password" inputName={"password"} type="password" inputValue={formData.password} inputOnchage={handleInputChange} />
                         <input className="bg-black min-w-[50%] p-4 text-white font-Roboto self-end rounded-xl mt-6 hover:bg-slate-100/70 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" type="submit" value="Sign In" />
                         <div className="flex gap-5 font-Roboto mt-2">
