@@ -35,7 +35,7 @@ const SignUp = () => {
             const res = await register(formData)
             console.log(res)
         } catch (e) {
-            console.log(e.response.data);
+            alert(e.response.data);
         }
 
     }
