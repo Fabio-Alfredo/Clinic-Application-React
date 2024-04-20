@@ -25,6 +25,7 @@ const SignIn = ({setIsAuthenticated}) => {
         try {
             const res = await login(formData);
             console.log(res);
+            localStorage.setItem("isAuthenticated", "true");
             setIsAuthenticated(true)
             navigate("/home")
         } catch (e) {
