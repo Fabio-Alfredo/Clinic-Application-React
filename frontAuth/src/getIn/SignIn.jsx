@@ -2,27 +2,26 @@ import { NavLink, useNavigate } from "react-router-dom";
 import InputField from "./InputFiled";
 import { useState } from "react";
 import { login } from "../service/service";
+import { userForm } from "../hooks/useForm";
 
 const SignIn = ({setIsAuthenticated}) => {
 
-    const [formData, setFormData] = useState({
-        identifier: '',
-        password: ''
+    const {identifier, password, onInputChange}=userForm({
+        identifier:'',
+        password:''
     })
     const navigate = useNavigate();
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        })
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
+            
+            const formData={
+                identifier:identifier,
+                password:password
+            }
+    
             const res = await login(formData);
             console.log(res);
             localStorage.setItem("isAuthenticated", "true");
@@ -45,8 +44,8 @@ const SignIn = ({setIsAuthenticated}) => {
                         Sign In
                     </p>
                     <form className="flex flex-col gap-5 w-4/5 3xl:w-3/4 items-center" onSubmit={handleSubmit} >
-                        <InputField nameField="Username or Email" inputName={"identifier"} type="text" placeH="e.g. NimbusX" inputValue={formData.identifier} inputOnchage={handleInputChange} />
-                        <InputField nameField="Password" inputName={"password"} type="password" inputValue={formData.password} inputOnchage={handleInputChange} />
+                        <InputField nameField="Username or Email" inputName={"identifier"} type="text" placeH="e.g. NimbusX" inputValue={identifier} inputOnchage={onInputChange} />
+                        <InputField nameField="Password" inputName={"password"} type="password" inputValue={password} inputOnchage={onInputChange} />
                         <input className="bg-black min-w-[50%] p-4 text-white font-Roboto self-end rounded-xl mt-6 hover:bg-slate-100/70 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" type="submit" value="Sign In" />
                         <div className="flex gap-5 font-Roboto mt-2">
                             <p>Don't you have an account yet?</p>
