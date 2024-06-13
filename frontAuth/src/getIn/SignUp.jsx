@@ -6,7 +6,7 @@ import { register } from "../service/service";
 import { userForm } from "../hooks/useForm";
 
 const SignUp = () => {
-    const [passwordError, setPasswordError] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
 
 
     const { userName, email, password, passwordConf, onInputChange } = userForm({
@@ -38,12 +38,10 @@ const SignUp = () => {
         } catch (e) {
             if (e.response.status === 400) {
                 console.log(e.response.data)
-                setPasswordError(e.response.data.password);
-
+                setPasswordError(true)
                 return;
             }
             alert(e.response.data);
-
         }
 
     }

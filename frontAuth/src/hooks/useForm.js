@@ -8,6 +8,7 @@ export const userForm=(initForm={})=>{
     const  onInputChange=(e)=>{
         const {name, value} =e.target
 
+
         setFormData({
             ...formData,
             [name]:value
@@ -20,7 +21,7 @@ export const userForm=(initForm={})=>{
     }
 
     return{
-        ...formData,
+        ...f,
         formData,
         onInputChange,
         resetForm
