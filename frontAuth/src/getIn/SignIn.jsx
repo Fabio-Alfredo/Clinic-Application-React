@@ -1,12 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import InputField from "./InputFiled";
 import { useState } from "react";
-import { login } from "../service/service";
+import { login, saveToken } from "../service/service";
 
 const SignIn = () => {
 
+    const navigate = useNavigate();
+
+    const userAuth = () => {
+        navigate('/Home')
+    }
+
     const [formData, setFormData] = useState({
-        userName: '',
+        email: '',
         password: ''
     })
 
@@ -24,6 +30,9 @@ const SignIn = () => {
         try {
             const res = await login(formData);
             console.log(res);
+            saveToken(res.data);
+            userAuth();
+            
         } catch (e) {
             if (e.response.status === 400){
                 console.log(e.response.data)
@@ -40,7 +49,7 @@ const SignIn = () => {
                         Sign In
                     </p>
                     <form className="flex flex-col gap-5 w-4/5 3xl:w-3/4 items-center" onSubmit={handleSubmit} >
-                        <InputField nameField="Username" inputName={"userName"} type="text" placeH="e.g. NimbusX" inputValue={formData.userName} inputOnchage={handleInputChange} />
+                        <InputField nameField="email" inputName={"email"} type="text" placeH="e.g. NimbusX" inputValue={formData.email} inputOnchage={handleInputChange} />
                         <InputField nameField="Password" inputName={"password"} type="password" inputValue={formData.password} inputOnchage={handleInputChange} />
                         <input className="bg-black min-w-[50%] p-4 text-white font-Roboto self-end rounded-xl mt-6 hover:bg-slate-100/70 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" type="submit" value="Sign In" />
                         <div className="flex gap-5 font-Roboto mt-2">

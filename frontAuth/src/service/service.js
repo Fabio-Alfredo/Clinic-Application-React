@@ -1,6 +1,10 @@
 import axios from 'axios'
 
+const TOKEN = "token";
 const BASE_URL = 'http://localhost:8080/api/auth'
+
+
+export const saveToken = (tokenLs = "") => localStorage.setItem(TOKEN, JSON.stringify(tokenLs));
 
 export const register = async (formData) => {
     try {
@@ -12,7 +16,7 @@ export const register = async (formData) => {
 
         return res.data;
     } catch (error) {
-        
+
         console.error('Error al realizar la petición:', error);
         throw error
     }
