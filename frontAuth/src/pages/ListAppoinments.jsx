@@ -13,7 +13,8 @@ const ListAppoinments = () => {
     const fetchAppointments = async () => {
         try {
             const res = await getAppointments(filter)
-            setAppointments(res)
+            console.log(res.data);
+            setAppointments(res.data)
 
         } catch (error) {
             Swal.fire({
