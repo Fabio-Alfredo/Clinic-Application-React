@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
-import PacientCard from '../components/pacientComponents/AppoinmentCard';
-import MenuRequest from '../components/pacientComponents/MenuRequest';
+import PacientCard from '../components/appoinmentsPacientComponents/AppoinmentCard';
+import MenuRequest from '../components/appoinmentsPacientComponents/MenuRequest';
 import { getAppointments } from '../service/service';
 import { IoAlertCircleOutline } from "react-icons/io5";
+import Swal from 'sweetalert2'
 
 const ListAppoinments = () => {
     const [filter, setfilter] = useState('')
@@ -15,8 +16,11 @@ const ListAppoinments = () => {
             setAppointments(res)
 
         } catch (error) {
-            console.error('Error al realizar la petición:', error);
-            throw error;
+            Swal.fire({
+                title: "Error!",
+                text: `${error.response.data.message}`,
+                icon: "error",
+            })
         }
 
     }
@@ -45,7 +49,6 @@ const ListAppoinments = () => {
                         <p className='flex gap-2'>No hay citas disponibles. <IoAlertCircleOutline /></p>
                     </div>
                 )}
-                {/* <PacientCard  /> */}
                 <hr className='h-0.5 bg-black my-8 mx-4' />
             </div>
         </div>

@@ -53,3 +53,18 @@ export const getAppointments = async (phase) => {
         throw error;
     }
 }
+
+export const createAppointment = async (formData) => {
+    try {
+        const res = await axios.post('http://localhost:8080/api/appointment/request', formData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+    }catch (error){
+        console.error('Error al realizar la petición:', error.response.data);
+        throw error;
+    }
+}

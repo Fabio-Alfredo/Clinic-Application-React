@@ -13,6 +13,9 @@ export default {
           '100%': { backgroundPosition: '0% 50%' },
         },
       },
+      colors:{
+        'input-color': '#D9D9D9',
+      },
       backgroundSize: {
         '300%': '300%',
       },
