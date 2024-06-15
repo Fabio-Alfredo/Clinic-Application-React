@@ -5,6 +5,7 @@ const BASE_URL = 'http://localhost:8080/api/auth'
 
 
 export const saveToken = (tokenLs = "") => localStorage.setItem(TOKEN, JSON.stringify(tokenLs));
+ export const getToken = () => JSON.parse(localStorage.getItem(TOKEN)).token;
 
 export const register = async (formData) => {
     try {
@@ -31,6 +32,22 @@ export const login = async (formData) => {
         })
 
         return res.data;
+    } catch (error) {
+        console.error('Error al realizar la petición:', error);
+        throw error;
+    }
+}
+
+export const getAppointments = async (phase) => {
+    try {
+        const res = await axios.get(`http://localhost:8080/api/appointment/own?phase=${phase}` ,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+
     } catch (error) {
         console.error('Error al realizar la petición:', error);
         throw error;
