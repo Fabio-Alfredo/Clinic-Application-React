@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
-import PacientCard from '../components/appoinmentsPacientComponents/AppoinmentCard';
 import { getfinishedAppointments } from '../service/service';
 import { IoAlertCircleOutline } from "react-icons/io5";
 import Swal from 'sweetalert2'
-
+import Finished from '../components/appointmentsFinished/Finished';
+import { useForm } from '../hooks/useForm';
 
 
 const NewPrescription = () => {
 
     const [appointments, setAppointments] = useState([])
+    const [Appoint, setAppoint] = useState( {name: '', reason: ''})
+
+    const { name, reason, appointment, prescription, dosage, medicines } = useForm(
+        {
+            name: '',
+            reason: '',
+            appointments: '',
+            prescription: [{ dosage: '', medicines: '' }]
+        })
 
     const fetchAppointments = async () => {
         try {
@@ -33,16 +42,20 @@ const NewPrescription = () => {
 
     return (
         <div className='flex items-center justify-center w-full bg-color-primary px-6  h-screen'>
-            <div className='w-full p-4 sm:p-8 shadow-2xl rounded-3xl bg-white h-fit lg:w-2/3  xl:w-1/2' > {/* query */}
+            <div className='p-4 sm:p-8 shadow-2xl rounded-3xl bg-white h-fit w-[60rem]' >
                 <Navigation title={"Citas medicas"} />
                 <hr className='h-0.5 bg-black mb-6 mx-4' />
-                <div className='flex'>
-                    <div className='w-full'>
+                <div className='flex w-full h-full'>
+                    <div className='w-full h-full'>
                         {appointments.length > 0 ? (
-                            <div className='overflow-y-auto h-[35vh] md:h-[40vh] px-4 items-center border-solid border-black'>
+                            <div className='overflow-y-auto overflow-x-hidden w-24rem h-[35vh] md:h-[40vh] px-4 items-center border-solid border-black border-4'>
                                 {
                                     appointments.map(appointment => (
-                                        <PacientCard key={appointment.id} reason={appointment.reason} phase={appointment.status} date={appointment.realization} />
+                                        <div key={appointment.id} onClick={() => 
+                                            setAppoint({ ...Appoint, name: appointment.name, reason: appointment.reason})
+                                        }>
+                                            <Finished key={appointment.id} name={appointment.name} reason={appointment.reason} />
+                                        </div>
                                     ))
                                 }
                             </div>
@@ -52,10 +65,17 @@ const NewPrescription = () => {
                             </div>
                         )}
                     </div>
-                    <div className='flex flex-col w-full items-center'>
-                        <form>
-                            <input type="text" placeholder="Buscar cita" className="w-full p-2 border-2 border-black rounded-xl" name="search" id="search" />
-                            <input type="submit" value="Buscar" className="w-full p-2 bg-black text-white rounded-xl mt-2 hover:bg-slate-100 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" />
+                    <div className='flex w-[90rem] h-[35vh] md:h-[50vh] justify-center items-center'>
+                        <form className='flex w-full h-full flex-wrap gap-2 justify-center'>
+                            <span className="w-1/5 text-lg font-bold">Paciente:</span>
+                            <p className='w-3/5'>{Appoint.name}</p>
+                            <span className="w-1/5 text-lg font-bold">Razón:</span>
+                            <p className='w-3/5'>{ Appoint.reason }</p>
+                            <span className="w-1/5 text-lg font-bold">Dosis:</span>
+                            <textarea rows={1} className='w-3/5 p-1 rounded border-2' />
+                            <span className="w-1/5 text-lg font-bold">Medicina:</span>
+                            <textarea rows={3} className='w-3/5 p-1 rounded border-2' />
+                            <input type="submit" value="Agregar " className="w-1/2 p-2 place-self-end bg-black text-white rounded-xl mt-2 hover:bg-slate-100 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" />
                         </form>
                     </div>
                 </div>
