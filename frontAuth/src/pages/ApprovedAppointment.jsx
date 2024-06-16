@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import AppointmentBeApproved from '../components/appointmentsApproveComponents/AppointmentBeApproved';
-import { appointmentsPending, approvedAppointment } from '../service/service';
+import { appointmentsPending, approvedAppointment, deniedAppointment } from '../service/service';
 import Swal from 'sweetalert2'
 import { IoAlertCircleOutline } from "react-icons/io5";
 import FormApprovedAppointment from '../components/appointmentsApproveComponents/FormApprovedAppointment'
@@ -48,6 +48,16 @@ const ApprovedAppointment = () => {
         getAppointments();
     };
 
+    const handleModalDenied = async (id) => {
+        const res = await deniedAppointment(id);
+        Swal.fire({
+            title: "Exitoso!",
+            text: `${res.message}`,
+            icon: "success",
+        })
+        getAppointments();
+    }
+
     return (
         <div className='flex items-center justify-center w-full bg-color-primary px-6  h-screen'>
             <div className='w-full p-4 sm:p-8 shadow-2xl rounded-3xl bg-white h-fit lg:w-2/3  xl:w-1/2' > {/* query */}
@@ -76,6 +86,7 @@ const ApprovedAppointment = () => {
                         appointmentId={selectAppointment.id}
                         onClose={handleModalClose}
                         onSubmit={handleModalAction}
+                        onDenied={handleModalDenied}
                     />
                 )
             }

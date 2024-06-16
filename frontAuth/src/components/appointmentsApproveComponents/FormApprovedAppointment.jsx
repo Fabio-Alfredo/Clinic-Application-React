@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import {useForm} from '../../hooks/useForm'
+import { useForm } from '../../hooks/useForm'
 
 
-const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit }) => {
+const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onDenied }) => {
 
-    const {realization, duration, doctor,specialists,InputChange } = useForm({
+    const { realization, duration, doctor, specialists, InputChange } = useForm({
         realization: '',
         duration: '',
         doctor: '',
@@ -14,10 +14,10 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit }) =
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {
-            realization : realization,
-            schedulEndDate : realization,
-            duration : duration,
-            doctorEmail : doctor.split(',').map(doctor => doctor.trim()),
+            realization: realization,
+            schedulEndDate: realization,
+            duration: duration,
+            doctorEmail: doctor.split(',').map(doctor => doctor.trim()),
             specialists: specialists.split(',').map(specialist => specialist.trim()),
             isAccepted: true,
             userId: userId,
@@ -25,8 +25,15 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit }) =
         }
         onSubmit(formData);
         onClose();
-    
+
     };
+
+    const handleDenied=()=>{
+        onDenied(appointmentId);
+        onClose();
+    }
+
+
 
     return (
         <div className='fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50'>
@@ -48,7 +55,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit }) =
                     <div className='mb-4'>
                         <label className='block text-gray-700'>Duracion:</label>
                         <input
-                            type='number' 
+                            type='number'
                             name='duration'
                             value={duration}
                             onChange={InputChange}
@@ -81,13 +88,17 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit }) =
                             required
                         />
                     </div>
-                    <div className='flex justify-end'>
+                    <div className='flex justify-end gap-2'>
+                        <button type='submit' className='bg-green-500 text-white p-2 rounded'>
+                            Asignar
+                        </button>
+                        <button type='button' onClick={handleDenied} className='bg-blue-500 text-white p-2 rounded'>
+                            Denegar
+                        </button>
                         <button type='button' onClick={onClose} className='bg-red-500 text-white p-2 rounded mr-2'>
                             Cancelar
                         </button>
-                        <button type='submit' className='bg-blue-500 text-white p-2 rounded'>
-                            Asignar
-                        </button>
+
                     </div>
                 </form>
             </div>

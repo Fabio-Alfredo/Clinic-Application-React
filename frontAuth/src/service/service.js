@@ -98,3 +98,18 @@ export const approvedAppointment = async (formData) => {
         throw error;
     }
 }
+
+export const deniedAppointment = async (id) => {
+    try {
+        const res = await axios.get(`http://localhost:8080/api/appointment/clinic/denied?id=${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+    }catch (error) {
+        console.error('Error al realizar la petición:', error);
+        throw error;
+    }
+}
