@@ -39,6 +39,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit }) =
                             type='date'
                             value={realization}
                             name='realization'
+                            min={new Date().toISOString().split('T')[0]}
                             onChange={InputChange}
                             className='border rounded p-2 w-full'
                             required
