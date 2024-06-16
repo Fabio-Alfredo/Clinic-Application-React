@@ -56,7 +56,7 @@ const ListScheduleAppointmets = () => {
                             <ScheduleCard key={index} reason={appointment.appointments.appointment.reason} date={appointment.appointments.appointment.realization} user={appointment.appointments.appointment.user.name} />
                         </div>
                     )) : (
-                        <div className='overflow-y-auto flex justify-center items-center h-[35vh] md:h-[50vh] px-4'>
+                        <div className='overflow-y-auto flex justify-center items-center h-[30vh]  px-4'>
                             <p className='flex gap-2'>No hay citas disponibles. <IoAlertCircleOutline /></p>
                         </div>
                     )
@@ -68,6 +68,7 @@ const ListScheduleAppointmets = () => {
                 selectAppointment && (
                     <ContainerHistory
                         DateHistory={selectAppointment.appointments.historics}
+                        doctors={selectAppointment.appointments.doctors}
                         onClose={handleModalClose}
                     />
                 )
