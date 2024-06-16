@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import ListPacients from "./pages/ListAppoinments"
 import CreationAppoinment from "./pages/CreationAppoinment"
 import ApprovedAppointment from "./pages/ApprovedAppointment"
+import ListPrescription from "./pages/ListPrescriptions"
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/appointments" element={<ListPacients />} /> 
           <Route path="/create/appointment" element={<CreationAppoinment />} />
           <Route path="/approved/appointent" element={<ApprovedAppointment />} />
+          <Route path="/clinic/prescription" element={<ListPrescription />} />
         </Routes>
       </BrowserRouter>
     </>
