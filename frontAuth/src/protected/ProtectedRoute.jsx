@@ -8,7 +8,6 @@ const ProtectedRoute = ({ canActivate,children, redirectPath = '/', RequiredRole
     }
 
     if (RequiredRoles.length > 0 && !RequiredRoles.some(role => userRoles.map(r => r.code).includes(role))) {
-
         return <Navigate to={redirectPath} replace />
     }
 

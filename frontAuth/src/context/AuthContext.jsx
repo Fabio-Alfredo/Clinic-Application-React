@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const savedToken = localStorage.getItem('token');
         if (savedToken) {
-            console.log('entro');
+
             saveRole();
             setToken(JSON.parse(savedToken));
         }
@@ -21,12 +21,10 @@ const AuthProvider = ({ children }) => {
     const saveToken = (newToken) => {
         localStorage.setItem('token', JSON.stringify(newToken));
         setToken(newToken.token);
-        console.log(token.token);
     };
 
     const saveRole = async () => {
         const res = await getRolesUser();
-        console.log(res.data);
         setRole(res.data);
     }
 

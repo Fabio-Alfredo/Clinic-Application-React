@@ -8,7 +8,7 @@ const Home = () => {
 
     const navigate = useNavigate();
     const { roles } = useContext(AuthContext);
-    console.log(roles);
+
 
     const userAppointmets = () => {
         navigate('/appointments')
