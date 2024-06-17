@@ -21,9 +21,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/create/historic" element={<CreateHistoric/>} />
 
-          <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home"  />} >
+          <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home" />} >
             <Route path="/Home" element={<Home />} />
           </Route>
 
@@ -33,18 +32,23 @@ const App = () => {
           </Route>
 
           {/* ruta 2 */}
-          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home" />} >
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['ASST']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/approved/appointent" element={<ApprovedAppointment />} />
           </Route>
 
           {/* route 3 */}
-          <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home" />} >
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['PCTE']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/appointments" element={<ListPacients />} />
           </Route>
- 
+
           {/* ruta 4 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/schedule" element={<ListScheduleAppointmets />} />
+          </Route>
+
+          {/* ruta 7 */}
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/create/historic" element={<CreateHistoric />} />
           </Route>
         </Routes>
       </BrowserRouter>
