@@ -1,11 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import InputField from "./InputFiled";
 import { useState } from "react";
-import { login, saveToken } from "../service/service";
+import { login } from "../service/service";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 const SignIn = () => {
 
     const navigate = useNavigate();
+    const {saveToken} = useContext(AuthContext);
 
     const userAuth = () => {
         navigate('/Home')
@@ -29,7 +32,6 @@ const SignIn = () => {
 
         try {
             const res = await login(formData);
-            console.log(res);
             saveToken(res.data);
             userAuth();
             
