@@ -145,3 +145,19 @@ export const createPrescription = async (formData) => {
         throw error;
     }
 }
+
+export const updateRole = async (formData) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/user/config/user-role`, formData,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+    }
+    catch (error) {
+        console.error('Error al realizar la petición:', error);
+        throw error;
+    }  
+}
