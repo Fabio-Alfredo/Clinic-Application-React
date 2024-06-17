@@ -5,21 +5,32 @@ import { AuthContext } from '../context/AuthContext';
 import RoleBasedComponent from '../protected/RoleBasedComponent'
 import Header from '../components/Header';
 import InfoContainer from '../components/HomeComponents/InfoContainer';
+import { GridLoader } from 'react-spinners';
+
 
 const Home = () => {
 
     // const navigate = useNavigate();
-    // const { roles } = useContext(AuthContext);
-
+    const { roles, user } = useContext(AuthContext);
+    console.log(user)
 
     // const userAppointmets = () => {
     //     navigate('/appointments')
     // }
 
+    if(user == null){
+        return(
+            <div className='h-screen w-full flex justify-center items-center'>
+                <GridLoader color="#36d7b7" />
+            </div>
+        )
+    }
+
     return (
+
         <div>
             <Header/>
-            <InfoContainer/>
+            <InfoContainer name={user.name} email={user.email} />
         </div>
     );
 };

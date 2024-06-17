@@ -158,3 +158,17 @@ export const createHistoric = async (formData) => {
     }
 }
 
+export const getUser = async ()=>{
+    try{
+        const res = await axios.get('http://localhost:8080/api/user/data',{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+    }catch(error){
+        console.error('Error al realizar la petición:', error);
+        throw error.response;
+    }
+}

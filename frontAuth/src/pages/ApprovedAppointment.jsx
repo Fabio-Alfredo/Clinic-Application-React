@@ -59,7 +59,7 @@ const ApprovedAppointment = () => {
     }
 
     return (
-        <div className='flex items-center justify-center w-full bg-color-primary px-6  h-screen'>
+        <div className='flex items-center justify-center w-full bg-color-primary px-6 bg-blue-400 h-screen'>
             <div className='w-full p-4 sm:p-8 shadow-2xl rounded-3xl bg-white h-fit lg:w-2/3  xl:w-1/2' > {/* query */}
                 <Navigation title={"Citas medicas"} />
                 <hr className='h-0.5 bg-black mb-6 mx-4' />

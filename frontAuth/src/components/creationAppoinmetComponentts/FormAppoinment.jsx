@@ -11,7 +11,7 @@ const FormAppoinment = () => {
 
     const nav = useNavigate();
 
-    const { reason, date,  InputChange } = useForm({
+    const { reason, date, InputChange } = useForm({
         reason: ' ',
         date: ' '
     })
@@ -21,7 +21,7 @@ const FormAppoinment = () => {
         e.preventDefault()
         const formValues = {
             reason: reason,
-            date: date
+            request: date
         }
         try {
             const res = await createAppointment(formValues);
@@ -51,7 +51,7 @@ const FormAppoinment = () => {
             <form onSubmit={handleSubmit} className='w-full p-10 shadow-2xl rounded-3xl bg-white h-fit lg:p-6 xl:px-20 xl:py-10 lg:w-2/3 2xl:w-1/2' > {/* query */}
                 <Navigation title={"Agendar cita"} />
                 <TexTarea name={"reason"} rows={5} cols={20} label={"Motivo:"} inputValue={reason} inputOnchange={InputChange} />
-                <InputDate name={"date"} label={"Fecha:"} type={"date"} inputValue={date} inputOnchange={InputChange} />
+                <InputDate name={"date"} label={"Fecha:"} type={"datetime-local"} inputValue={date} inputOnchange={InputChange} />
                 <div className='w-full flex items-center justify-end pr-12'>
                     <button type='submit' className='w-36  bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl'>Enviar</button>
                 </div>

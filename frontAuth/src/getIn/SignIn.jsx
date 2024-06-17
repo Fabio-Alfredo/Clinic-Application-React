@@ -4,12 +4,13 @@ import { useState } from "react";
 import { login } from "../service/service";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import { getUser } from "../service/service";
 import Swal from 'sweetalert2'
 
 const SignIn = () => {
 
     const navigate = useNavigate();
-    const { saveToken } = useContext(AuthContext);
+    const { saveToken, saveUser } = useContext(AuthContext);
 
     const userAuth = () => {
         navigate('/Home')
@@ -34,6 +35,7 @@ const SignIn = () => {
         try {
             const res = await login(formData);
             saveToken(res.data);
+            getUserData();
             userAuth();
 
         } catch (e) {
@@ -42,6 +44,15 @@ const SignIn = () => {
                 text: `${e.data.message}`,
                 icon: "error",
             })
+        }
+    }
+
+    const getUserData = async () => {
+        try {
+            const res = await getUser();
+            saveUser(res.data);
+        } catch (error) {
+            console.error('Error al obtener los datos del usuario:', error);
         }
     }
 
@@ -68,5 +79,6 @@ const SignIn = () => {
         </>
     )
 };
+
 
 export default SignIn;
