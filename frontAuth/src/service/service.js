@@ -129,3 +129,19 @@ export const getfinishedAppointments = async () => {
         throw error;
     }
 }
+
+export const createPrescription = async (formData) => {
+    try {
+        const res = await axios.post(`${BASE_URL}/prescription/save`, formData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`,
+            }
+        })
+        return res.data;
+    }
+    catch (error) {
+        console.error('Error al realizar la petición:', error);
+        throw error;
+    }
+}
