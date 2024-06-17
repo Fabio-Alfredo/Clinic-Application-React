@@ -25,18 +25,22 @@ const App = () => {
             <Route path="/Home" element={<Home />} />
           </Route>
 
-          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
-            <Route path="/appointments" element={<ListPacients />} />
-          </Route>
-
+          {/* ruta 1 */}
           <Route element={<ProtectedRoute canActivate={token} />} >
             <Route path="/create/appointment" element={<CreationAppoinment />} />
           </Route>
 
+          {/* ruta 2 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/approved/appointent" element={<ApprovedAppointment />} />
           </Route>
 
+          {/* route 3 */}
+          <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home" />} >
+            <Route path="/appointments" element={<ListPacients />} />
+          </Route>
+
+          {/* ruta 4 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/schedule" element={<ListScheduleAppointmets />} />
           </Route>
