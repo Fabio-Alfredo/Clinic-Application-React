@@ -74,7 +74,7 @@ const NewPrescription = () => {
     }, [])
 
     return (
-        <div className='flex items-center justify-center w-full bg-color-primary px-6  h-screen'>
+        <div className='flex items-center justify-center w-full bg-blue-400 px-6  h-screen'>
             <div className='p-4 sm:p-8 shadow-2xl rounded-3xl bg-white h-fit w-[60rem]' >
                 <Navigation title={"Citas medicas"} />
                 <hr className='h-0.5 bg-black mb-6 mx-4' />
