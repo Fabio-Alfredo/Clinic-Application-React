@@ -4,11 +4,12 @@ import { useState } from "react";
 import { login } from "../service/service";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import Swal from 'sweetalert2'
 
 const SignIn = () => {
 
     const navigate = useNavigate();
-    const {saveToken} = useContext(AuthContext);
+    const { saveToken } = useContext(AuthContext);
 
     const userAuth = () => {
         navigate('/Home')
@@ -34,12 +35,13 @@ const SignIn = () => {
             const res = await login(formData);
             saveToken(res.data);
             userAuth();
-            
+
         } catch (e) {
-            if (e.response.status === 400){
-                console.log(e.response.data)
-                alert(e.response.data);
-            } 
+            Swal.fire({
+                title: "Error!",
+                text: `${e.data.message}`,
+                icon: "error",
+            })
         }
     }
 

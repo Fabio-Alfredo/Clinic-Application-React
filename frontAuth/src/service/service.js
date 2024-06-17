@@ -157,3 +157,4 @@ export const createHistoric = async (formData) => {
         throw error.response;
     }
 }
+
