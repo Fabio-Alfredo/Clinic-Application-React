@@ -12,8 +12,7 @@ import ProtectedRoute from "./protected/ProtectedRoute"
 
 const App = () => {
 
-  const {token, roles} =useContext(AuthContext)
-  console.log("mi token es: ", token)
+  const { token, roles } = useContext(AuthContext)
 
   return (
     <>
@@ -22,24 +21,24 @@ const App = () => {
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
 
-          <Route element={<ProtectedRoute canActivate={token}/>} >
-          <Route path="/Home" element={<Home />} />
+          <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home"  />} >
+            <Route path="/Home" element={<Home />} />
           </Route>
 
-          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home"/>} >
-          <Route path="/appointments" element={<ListPacients />} /> 
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/appointments" element={<ListPacients />} />
           </Route>
 
-          <Route element={<ProtectedRoute canActivate={token}/>} >
-          <Route path="/create/appointment" element={<CreationAppoinment />} />
+          <Route element={<ProtectedRoute canActivate={token} />} >
+            <Route path="/create/appointment" element={<CreationAppoinment />} />
           </Route>
 
-          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home"/>} >
-          <Route path="/approved/appointent" element={<ApprovedAppointment />} />
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/approved/appointent" element={<ApprovedAppointment />} />
           </Route>
 
-          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home"/>} >
-          <Route path="/schedule" element={<ListScheduleAppointmets />} />
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/schedule" element={<ListScheduleAppointmets />} />
           </Route>
         </Routes>
       </BrowserRouter>
