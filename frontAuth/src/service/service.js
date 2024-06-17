@@ -161,3 +161,35 @@ export const updateRole = async (formData) => {
         throw error;
     }  
 }
+
+export const getApprovedAppointments = async () => {
+    try {
+        const res = await axios.get(`${BASE_URL}/appointment/approved`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+    }
+    catch (error) {
+        console.error('Error al realizar la petición:', error);
+        throw error;
+    }
+}
+
+export const closeAppointment = async (id) => {
+    try {
+        const res = await axios.get(`${BASE_URL}/appointment/finish?id=${id}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getToken()}`
+            }
+        })
+        return res.data;
+    }
+    catch (error) {
+        console.error('Error al realizar la petición:', error);
+        throw error;
+    }
+}
