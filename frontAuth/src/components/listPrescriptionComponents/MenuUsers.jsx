@@ -33,7 +33,7 @@ const MenuUsers = ({setUsuario}) => {
 
     return(
         <>
-            <div onClick={handleEvent} className='relative pr-4 sm:pr-8 pb-2 cursor-pointer group/item'>
+            <div onClick={handleEvent} className='font-Roboto relative pr-4 sm:pr-8 pb-2 cursor-pointer group/item'>
                         <p className='font-popins text-sm flex sm:text-lg lg:text-xl items-center select-none py-2 px-4 rounded-full hover:bg-slate-100 duration-500 '>
                             {selectedUser}
                         </p>
