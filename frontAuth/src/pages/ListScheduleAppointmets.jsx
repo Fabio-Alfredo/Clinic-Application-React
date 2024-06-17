@@ -5,6 +5,7 @@ import ContainerHistory from '../components/appointmentsSchedule/ContainerHistor
 import DateHistory from '../components/appointmentsSchedule/DateHistory';
 import { appointmentSchedule } from '../service/service';
 import { IoAlertCircleOutline } from "react-icons/io5";
+import Swal from 'sweetalert2'
 
 
 const ListScheduleAppointmets = () => {
@@ -22,7 +23,11 @@ const ListScheduleAppointmets = () => {
             setAppointments(res.data)
 
         } catch (error) {
-            console.log(error)
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            })
         }
     }
 

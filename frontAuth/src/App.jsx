@@ -9,6 +9,7 @@ import ListScheduleAppointmets from "./pages/ListScheduleAppointmets"
 import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext"
 import ProtectedRoute from "./protected/ProtectedRoute"
+import CreateHistoric from "./pages/CreateHistoric"
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/create/historic" element={<CreateHistoric/>} />
 
           <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home"  />} >
             <Route path="/Home" element={<Home />} />
@@ -39,7 +41,7 @@ const App = () => {
           <Route element={<ProtectedRoute canActivate={token} redirectPath="/Home" />} >
             <Route path="/appointments" element={<ListPacients />} />
           </Route>
-
+ 
           {/* ruta 4 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/schedule" element={<ListScheduleAppointmets />} />

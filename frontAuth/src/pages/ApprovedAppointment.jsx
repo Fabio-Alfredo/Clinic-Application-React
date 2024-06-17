@@ -20,7 +20,7 @@ const ApprovedAppointment = () => {
         } catch (error) {
             Swal.fire({
                 title: "Error!",
-                text: `${error.response.data.message}`,
+                text: `${error.data.message}`,
                 icon: "error",
             })
         }
