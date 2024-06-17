@@ -6,6 +6,7 @@ import ListPacients from "./pages/ListAppoinments"
 import CreationAppoinment from "./pages/CreationAppoinment"
 import ApprovedAppointment from "./pages/ApprovedAppointment"
 import ListPrescription from "./pages/ListPrescriptions"
+import RecordUser from "./pages/RecordUser"
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/create/appointment" element={<CreationAppoinment />} />
           <Route path="/approved/appointent" element={<ApprovedAppointment />} />
           <Route path="/clinic/prescription" element={<ListPrescription />} />
+          <Route path="/history" element={<RecordUser/>} />
         </Routes>
       </BrowserRouter>
     </>
