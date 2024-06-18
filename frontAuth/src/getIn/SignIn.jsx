@@ -1,11 +1,16 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import InputField from "./InputFiled";
 import { useState } from "react";
-import { login, saveToken } from "../service/service";
+import { login } from "../service/service";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
+import { getUser } from "../service/service";
+import Swal from 'sweetalert2'
 
 const SignIn = () => {
 
     const navigate = useNavigate();
+    const { saveToken, saveUser, saveRole } = useContext(AuthContext);
 
     const userAuth = () => {
         navigate('/Home')
@@ -29,15 +34,31 @@ const SignIn = () => {
 
         try {
             const res = await login(formData);
-            console.log(res);
             saveToken(res.data);
+            saveRole();
+            getUserData();
             userAuth();
-            
+
         } catch (e) {
-            if (e.response.status === 400){
-                console.log(e.response.data)
-                alert(e.response.data);
-            } 
+            Swal.fire({
+                title: "Error!",
+                text: `${e.data.message}`,
+                icon: "error",
+            })
+        }
+    }
+
+    const getUserData = async () => {
+        try {
+            const res = await getUser();
+            saveUser(res.data);
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            });
+            console.error('Error al obtener los datos del usuario:', error);
         }
     }
 
@@ -64,5 +85,6 @@ const SignIn = () => {
         </>
     )
 };
+
 
 export default SignIn;

@@ -13,10 +13,10 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const schedulEndDate = reformatDate(duration, realization);
         const formData = {
             realization: realization,
-            schedulEndDate: realization,
-            duration: duration,
+            schedulEndDate: schedulEndDate,
             doctorEmail: doctor.split(',').map(doctor => doctor.trim()),
             specialists: specialists.split(',').map(specialist => specialist.trim()),
             isAccepted: true,
@@ -25,14 +25,37 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
         }
         onSubmit(formData);
         onClose();
-
     };
 
-    const handleDenied=()=>{
+    const reformatDate = (dateStr, realization) => {
+        const [hors, mins] = dateStr.split(':');
+        const end = new Date(realization);
+        end.setHours(hors)
+        end.setMinutes(mins)
+
+        const year = end.getFullYear();
+        const month = (end.getMonth() + 1).toString().padStart(2, '0'); 
+        const day = end.getDate().toString().padStart(2, '0'); 
+        const formattedHours = end.getHours().toString().padStart(2, '0'); 
+        const formattedMinutes = end.getMinutes().toString().padStart(2, '0'); 
+
+        const formattedDate = `${year}-${month}-${day}T${formattedHours}:${formattedMinutes}`;
+        return formattedDate;
+    }
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); 
+    const day = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+
+    const currentDateTime = `${year}-${month}-${day}T${hour}:${minute}`;
+
+    const handleDenied = () => {
         onDenied(appointmentId);
         onClose();
     }
-
 
 
     return (
@@ -43,23 +66,23 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                     <div className='mb-4'>
                         <label className='block text-gray-700'>Fecha:</label>
                         <input
-                            type='date'
+                            type='datetime-local'
                             value={realization}
                             name='realization'
-                            min={new Date().toISOString().split('T')[0]}
+                            min={currentDateTime}
                             onChange={InputChange}
                             className='border rounded p-2 w-full'
                             required
                         />
                     </div>
                     <div className='mb-4'>
-                        <label className='block text-gray-700'>Duracion:</label>
+                        <label className='block text-gray-700'>Finalizacion:</label>
                         <input
-                            type='number'
+                            type='time'
                             name='duration'
                             value={duration}
                             onChange={InputChange}
-                            placeholder='Doctor'
+                            placeholder=''
                             className='border rounded p-2 w-full'
                             required
                         />
@@ -71,7 +94,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                             name='doctor'
                             value={doctor}
                             onChange={InputChange}
-                            placeholder='Doctor'
+                            placeholder='doctro@gmail.com'
                             className='border rounded p-2 w-full'
                             required
                         />
@@ -83,7 +106,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                             name='specialists'
                             value={specialists}
                             onChange={InputChange}
-                            placeholder='Doctor'
+                            placeholder='Dermatologo'
                             className='border rounded p-2 w-full'
                             required
                         />
