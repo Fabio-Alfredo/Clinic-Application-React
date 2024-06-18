@@ -9,8 +9,10 @@ import Swal from 'sweetalert2'
 
 
 const ListScheduleAppointmets = () => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const [filter, setfilter] = useState(new Date().toISOString().split('T')[0])
+    const [filter, setfilter] = useState(today.toISOString().split('T')[0])
     const [appointments, setAppointments] = useState([])
     const [selectAppointment, setSelectAppointment] = useState(null)
 

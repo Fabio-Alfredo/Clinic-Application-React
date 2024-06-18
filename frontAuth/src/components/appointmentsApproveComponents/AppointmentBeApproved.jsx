@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AppointmentBeApproved = ({ reason = "dolor de piefsdafafasdfsafdfadfasdf", user = "fabio", date = "12/12/12" }) => {
+const AppointmentBeApproved = ({ reason = "dolor de piefsdafafasdfsafdfadfasdf", user = "fabio", date }) => {
 
     const formatDate = (dateString) => {
         if (dateString === null) return 'No definida';
@@ -12,18 +12,17 @@ const AppointmentBeApproved = ({ reason = "dolor de piefsdafafasdfsafdfadfasdf",
     };
 
     const formatTimeTo12Hour = (dateString) => {
-        if (dateString === null) return 'No definida';
-
+        if (!dateString) return 'No definida';
+    
         const dateObj = new Date(dateString);
-
-        let hours = dateObj.getHours();
-        const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+        const hours = dateObj.getUTCHours(); // Obtener horas en UTC
+        const minutes = dateObj.getUTCMinutes(); // Obtener minutos en UTC
         const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // El 0 debe ser 12
-        const formattedHours = String(hours).padStart(2, '0');
-
-        return `${formattedHours}:${minutes} ${ampm}`;
+        const formattedHours = hours % 12 === 0 ? 12 : hours % 12; // Convertir de formato 24 horas a 12 horas
+    
+        const formattedTime = `${formattedHours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    
+        return formattedTime;
     };
 
     return (
