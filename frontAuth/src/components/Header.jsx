@@ -24,6 +24,13 @@ const Header = () => {
                             <li className='hover:scale-110 duration-300 cursor-pointer'> Cronograma</li>
                         </Link>
                     </RoleBasedComponent>
+
+                    <RoleBasedComponent allowedRoles={['DCTR']} userRoles={roles}>
+                        <Link to='/prescriptions'>
+                            <li className='hover:scale-110 duration-300 cursor-pointer'> Prescripciones</li>
+                        </Link>
+                    </RoleBasedComponent>
+
                     <li className='hover:scale-110 duration-300 cursor-pointer'> otra</li>
                 </ul>
             </div>

@@ -60,7 +60,7 @@ const App = () => {
 
           {/* ruta 8 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['PCTE']} userRoles={roles} redirectPath="/Home" />} >
-            <Route path="/record/user" element={<RecordUser />} />
+            <Route path="/history" element={<RecordUser />} />
           </Route>
 
         </Routes>
