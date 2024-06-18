@@ -1,11 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import { IoAlertCircleOutline } from "react-icons/io5";
 import { useState, useEffect } from 'react';
-import { getApprovedAppointments } from '../service/service';
+import { getApprovedAppointments, closeAppointment } from '../service/service';
+import Finished from '../components/appointmentsFinished/Finished';
+import Swal from 'sweetalert2'
 
 const CloseAppointment = () => {
 
+    const navigation = useNavigate()
     const [appointments, setAppointments] = useState([])
     const [Appoint, setAppoint] = useState({ id: '', name: '', reason: '' })
 
@@ -15,6 +19,29 @@ const CloseAppointment = () => {
             setAppointments(res.data)
 
         } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: `${error.response.data.message}`,
+                icon: "error",
+            })
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await closeAppointment(Appoint.id);
+            Swal.fire({
+                title: "Exitoso!",
+                text: `${res.message}`,
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(() => {
+                navigation('/Home')
+            })
+        }
+        catch (error) {
             Swal.fire({
                 title: "Error!",
                 text: `${error.response.data.message}`,
@@ -39,9 +66,9 @@ const CloseAppointment = () => {
                                 {
                                     appointments.map(appointment => (
                                         <div key={appointment.id} onClick={() =>
-                                            setAppoint({ ...Appoint, id: appointment.id, name: appointment.name, reason: appointment.reason })
+                                            setAppoint({ ...Appoint, id: appointment.id, name: appointment.user, reason: appointment.reason })
                                         }>
-                                            <Finished key={appointment.id} name={appointment.name} reason={appointment.reason} />
+                                            <Finished key={appointment.id} name={appointment.user} reason={appointment.reason} />
                                         </div>
                                     ))
                                 }
@@ -52,19 +79,13 @@ const CloseAppointment = () => {
                             </div>
                         )}
                     </div>
-                    <div className='flex w-[90rem] h-[35vh] md:h-[50vh] justify-center items-center'>
-                        <form className='flex w-full h-full flex-wrap gap-2 justify-center'>
+                    <div className='flex w-[90rem] h-[35vh] md:h-[50vh]'>
+                        <form className='flex w-full h-full flex-wrap gap-2 justify-center' onSubmit={handleSubmit}>
                             <span className="w-1/5 text-lg font-bold">Paciente:</span>
                             <p className='w-3/5'>{Appoint.name}</p>
                             <span className="w-1/5 text-lg font-bold">Razón:</span>
                             <p className='w-3/5'>{Appoint.reason}</p>
-                            <span className="w-1/5 text-lg font-bold">Medicina:</span>
-                            <input className='w-3/5 h-10 p-1 rounded border-2' name='medicine' />
-                            <span className="w-1/5 text-lg font-bold">Dosis:</span>
-                            <input className='w-3/5 h-10 p-1 rounded border-2' name='dosage' />
-                            <span className="w-1/5 text-lg font-bold">Ultima dosis:</span>
-                            <input type='date' name='d_finalization' className='w-3/5 h-10 p-1 rounded border-2' />
-                            <input type="submit" value="Recetar" className="w-1/2 p-2 place-self-end bg-black text-white rounded-xl mt-2 hover:bg-slate-100 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" />
+                            <input type="submit" value="Finalizar" className="w-1/2 p-2 place-self-end bg-black text-white rounded-xl mt-2 hover:bg-slate-100 hover:text-black transition ease-in-out duration-200 hover:ring-2 hover:ring-black" />
                         </form>
                     </div>
                 </div>
