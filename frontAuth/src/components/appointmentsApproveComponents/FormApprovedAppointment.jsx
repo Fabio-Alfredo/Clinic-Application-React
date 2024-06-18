@@ -13,10 +13,10 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const schedulEndDate = reformatDate(duration, realization);
         const formData = {
             realization: realization,
-            schedulEndDate: realization,
-            duration: duration,
+            schedulEndDate: schedulEndDate,
             doctorEmail: doctor.split(',').map(doctor => doctor.trim()),
             specialists: specialists.split(',').map(specialist => specialist.trim()),
             isAccepted: true,
@@ -25,10 +25,26 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
         }
         onSubmit(formData);
         onClose();
-
     };
 
-    const handleDenied=()=>{
+    const reformatDate = (dateStr, realization) => {
+        const [hors, mins] = dateStr.split(':');
+        const end = new Date(realization);
+        end.setHours(hors)
+        end.setMinutes(mins)
+
+        const year = end.getFullYear();
+        const month = (end.getMonth() + 1).toString().padStart(2, '0'); 
+        const day = end.getDate().toString().padStart(2, '0'); 
+        const formattedHours = end.getHours().toString().padStart(2, '0'); 
+        const formattedMinutes = end.getMinutes().toString().padStart(2, '0'); 
+
+        const formattedDate = `${year}-${month}-${day}T${formattedHours}:${formattedMinutes}`;
+        console.log("Fecha formateada: " + formattedDate);
+        return formattedDate;
+    }
+
+    const handleDenied = () => {
         onDenied(appointmentId);
         onClose();
     }
@@ -43,7 +59,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                     <div className='mb-4'>
                         <label className='block text-gray-700'>Fecha:</label>
                         <input
-                            type='date'
+                            type='datetime-local'
                             value={realization}
                             name='realization'
                             min={new Date().toISOString().split('T')[0]}
@@ -55,7 +71,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                     <div className='mb-4'>
                         <label className='block text-gray-700'>Duracion:</label>
                         <input
-                            type='number'
+                            type='time'
                             name='duration'
                             value={duration}
                             onChange={InputChange}
