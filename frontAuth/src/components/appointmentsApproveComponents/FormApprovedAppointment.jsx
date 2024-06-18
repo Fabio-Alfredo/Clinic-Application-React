@@ -69,13 +69,13 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                         />
                     </div>
                     <div className='mb-4'>
-                        <label className='block text-gray-700'>Duracion:</label>
+                        <label className='block text-gray-700'>Finalizacion:</label>
                         <input
                             type='time'
                             name='duration'
                             value={duration}
                             onChange={InputChange}
-                            placeholder='Doctor'
+                            placeholder=''
                             className='border rounded p-2 w-full'
                             required
                         />
@@ -87,7 +87,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                             name='doctor'
                             value={doctor}
                             onChange={InputChange}
-                            placeholder='Doctor'
+                            placeholder='doctro@gmail.com'
                             className='border rounded p-2 w-full'
                             required
                         />
@@ -99,7 +99,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                             name='specialists'
                             value={specialists}
                             onChange={InputChange}
-                            placeholder='Doctor'
+                            placeholder='Dermatologo'
                             className='border rounded p-2 w-full'
                             required
                         />
