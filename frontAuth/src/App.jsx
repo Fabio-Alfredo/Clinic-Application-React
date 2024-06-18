@@ -48,10 +48,21 @@ const App = () => {
             <Route path="/schedule" element={<ListScheduleAppointmets />} />
           </Route>
 
+          {/* ruta 5 */}
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/prescriptions" element={<ListPrescription />} />
+          </Route>
+
           {/* ruta 7 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/create/historic" element={<CreateHistoric />} />
           </Route>
+
+          {/* ruta 8 */}
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['PCTE']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/record/user" element={<RecordUser />} />
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </>
