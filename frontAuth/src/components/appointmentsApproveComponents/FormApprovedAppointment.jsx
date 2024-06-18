@@ -40,7 +40,6 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
         const formattedMinutes = end.getMinutes().toString().padStart(2, '0'); 
 
         const formattedDate = `${year}-${month}-${day}T${formattedHours}:${formattedMinutes}`;
-        console.log("Fecha formateada: " + formattedDate);
         return formattedDate;
     }
 

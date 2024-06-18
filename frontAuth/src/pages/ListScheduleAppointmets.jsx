@@ -19,9 +19,7 @@ const ListScheduleAppointmets = () => {
     const fetchAppointments = async () => {
         try {
             const formatDate = filter.split('-').join('/');
-            console.log(formatDate);
             const res = await appointmentSchedule(formatDate)
-            console.log(res.data);
             setAppointments(res.data)
 
         } catch (error) {
@@ -58,9 +56,9 @@ const ListScheduleAppointmets = () => {
                 <DateHistory setFilter={setfilter} />
                 {appointments.length > 0 ?
 
-                    appointments.map((appointment, index) => (
-                        <div key={appointment.id} onClick={() => handleCardClick(appointment)}>
-                            <ScheduleCard key={index} reason={appointment.appointments.appointment.reason} date={appointment.appointments.appointment.realization} user={appointment.appointments.appointment.user.name} />
+                    appointments.map((a) => (
+                        <div key={a.appointments.appointment.id} onClick={() => handleCardClick(a)}>
+                            <ScheduleCard reason={a.appointments.appointment.reason} date={a.appointments.appointment.realization} user={a.appointments.appointment.user.name} />
                         </div>
                     )) : (
                         <div className='overflow-y-auto flex justify-center items-center h-[30vh]  px-4'>

@@ -19,7 +19,7 @@ const DateHistory = ({ setFilter }) => {
         });
         if (date) {
             setFilter(date);
-            // console.log(date);
+
         }
     }
 

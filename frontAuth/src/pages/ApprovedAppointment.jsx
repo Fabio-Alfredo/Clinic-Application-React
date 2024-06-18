@@ -16,7 +16,6 @@ const ApprovedAppointment = () => {
     const getAppointments = async () => {
         try {
             const res = await appointmentsPending();
-            console.log(res.data);
             setAppointments(res.data);
         } catch (error) {
             Swal.fire({

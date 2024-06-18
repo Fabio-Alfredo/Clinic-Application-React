@@ -9,14 +9,8 @@ import { GridLoader } from 'react-spinners';
 
 
 const Home = () => {
+    const { user } = useContext(AuthContext);
 
-    // const navigate = useNavigate();
-    const { roles, user } = useContext(AuthContext);
-    console.log(user)
-
-    // const userAppointmets = () => {
-    //     navigate('/appointments')
-    // }
 
     if(user == null){
         return(

@@ -28,11 +28,10 @@ const SignUp = () => {
             [name]: value
         })
 
-        console.log({ formData });
     }
 
     const handleSubmit = async (e) => {
-        console.log("aaaaaaaaaaaaaaaaa")
+
         e.preventDefault();
 
         if (formData.password !== formData.passwordConf) {
@@ -42,7 +41,6 @@ const SignUp = () => {
         }
 
         try {
-            console.log(formData);
             const res = await register(formData)
             userRegister();
             console.log(res)

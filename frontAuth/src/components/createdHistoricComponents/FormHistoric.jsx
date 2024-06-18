@@ -35,7 +35,6 @@ const FormHistoric = () => {
                 nav('/Home')
             })
         } catch (error) {
-            console.log(error.data.message)
             Swal.fire({
                 title: 'Error',
                 text: `${error.data.message}`,
