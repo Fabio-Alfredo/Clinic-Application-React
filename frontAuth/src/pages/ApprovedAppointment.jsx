@@ -20,7 +20,7 @@ const ApprovedAppointment = () => {
         } catch (error) {
             Swal.fire({
                 title: "Error!",
-                text: `${error.response.data.message}`,
+                text: `${error.data.message}`,
                 icon: "error",
             })
         }
@@ -39,27 +39,43 @@ const ApprovedAppointment = () => {
     };
 
     const handleModalAction = async (data) => {
-        const res = await approvedAppointment(data);
-        Swal.fire({
-            title: "Exitoso!",
-            text: `${res.message}`,
-            icon: "success",
-        })
-        getAppointments();
+        try {
+            const res = await approvedAppointment(data);
+            Swal.fire({
+                title: "Exitoso!",
+                text: `${res.message}`,
+                icon: "success",
+            })
+            getAppointments();
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            })
+        }
     };
 
     const handleModalDenied = async (id) => {
-        const res = await deniedAppointment(id);
-        Swal.fire({
-            title: "Exitoso!",
-            text: `${res.message}`,
-            icon: "success",
-        })
-        getAppointments();
+        try {
+            const res = await deniedAppointment(id);
+            Swal.fire({
+                title: "Exitoso!",
+                text: `${res.message}`,
+                icon: "success",
+            })
+            getAppointments();
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            })
+        }
     }
 
     return (
-        <div className='flex items-center justify-center w-full bg-color-primary px-6  h-screen'>
+        <div className='flex items-center justify-center w-full bg-color-primary px-6 bg-blue-400 h-screen'>
             <div className='w-full p-4 sm:p-8 shadow-2xl rounded-3xl bg-white h-fit lg:w-2/3  xl:w-1/2' > {/* query */}
                 <Navigation title={"Citas medicas"} />
                 <hr className='h-0.5 bg-black mb-6 mx-4' />

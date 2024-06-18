@@ -5,24 +5,29 @@ import ContainerHistory from '../components/appointmentsSchedule/ContainerHistor
 import DateHistory from '../components/appointmentsSchedule/DateHistory';
 import { appointmentSchedule } from '../service/service';
 import { IoAlertCircleOutline } from "react-icons/io5";
+import Swal from 'sweetalert2'
 
 
 const ListScheduleAppointmets = () => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-    const [filter, setfilter] = useState(new Date().toISOString().split('T')[0])
+    const [filter, setfilter] = useState(today.toISOString().split('T')[0])
     const [appointments, setAppointments] = useState([])
     const [selectAppointment, setSelectAppointment] = useState(null)
 
     const fetchAppointments = async () => {
         try {
             const formatDate = filter.split('-').join('/');
-            console.log(formatDate);
             const res = await appointmentSchedule(formatDate)
-            console.log(res.data);
             setAppointments(res.data)
 
         } catch (error) {
-            console.log(error)
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            })
         }
     }
 
@@ -51,13 +56,13 @@ const ListScheduleAppointmets = () => {
                 <DateHistory setFilter={setfilter} />
                 {appointments.length > 0 ?
 
-                    appointments.map((appointment, index) => (
-                        <div key={appointment.id} onClick={() => handleCardClick(appointment)}>
-                            <ScheduleCard key={index} reason={appointment.appointments.appointment.reason} date={appointment.appointments.appointment.realization} user={appointment.appointments.appointment.user.name} />
+                    appointments.map((a) => (
+                        <div key={a.appointments.appointment.id} onClick={() => handleCardClick(a)}>
+                            <ScheduleCard reason={a.appointments.appointment.reason} date={a.appointments.appointment.realization} user={a.appointments.appointment.user.name} />
                         </div>
                     )) : (
                         <div className='overflow-y-auto flex justify-center items-center h-[30vh]  px-4'>
-                            <p className='flex gap-2'>No hay citas disponibles. <IoAlertCircleOutline /></p>
+                            <p className='flex gap-2'>No hay citas disponibles para ahora. <IoAlertCircleOutline /></p>
                         </div>
                     )
                 }

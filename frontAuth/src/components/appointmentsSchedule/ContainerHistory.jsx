@@ -26,9 +26,9 @@ const ContainerHistory = ({ DateHistory = [], doctors = [], onClose }) => {
                 </thead>
                 <tbody className='border-black border-solid border-2'>
                     {
-                        DateHistory.map((historic, index) => (
-                            <tr key={index} className="hover:bg-gray-100">
-                                <td className="border-t border-gray-200 px-4 py-2 ">{formatDate(historic.date)}</td>
+                        DateHistory.map((historic) => (
+                            <tr key={historic.id} className="hover:bg-gray-100">
+                                <td className="border-t border-gray-200 px-4 py-2 ">{formatDate(historic.creteAt)}</td>
                                 <td className="border-t border-gray-200 px-4 py-2 max-w-32 text-wrap overflow-hidden break-words text-center">{historic.reason}</td>
                             </tr>
                         ))

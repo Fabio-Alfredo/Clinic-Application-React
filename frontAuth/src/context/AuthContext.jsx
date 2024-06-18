@@ -7,13 +7,15 @@ const AuthProvider = ({ children }) => {
 
     const [token, setToken] = useState(null);
     const [roles, setRole] = useState([]);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const savedToken = localStorage.getItem('token');
+        const savedUser = localStorage.getItem('user');
         if (savedToken) {
-
             saveRole();
             setToken(JSON.parse(savedToken));
+            setUser(JSON.parse(savedUser));
         }
     }, []);
 
@@ -28,13 +30,21 @@ const AuthProvider = ({ children }) => {
         setRole(res.data);
     }
 
-    const removeToken = () => {
+    const saveUser = (data)=>{
+        const user = {name: data.name, email: data.email}
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+    }
+
+    const removeData = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
         setToken(null);
     };
 
     return (
-        <AuthContext.Provider value={{  token,roles, saveToken, removeToken }}>
+        <AuthContext.Provider value={{ user, token,roles, saveRole, saveToken, removeData, saveUser }}>
             {children}
         </AuthContext.Provider>
     );

@@ -6,7 +6,7 @@ import { getAppointments } from '../service/service';
 import { IoAlertCircleOutline } from "react-icons/io5";
 import Swal from 'sweetalert2'
 
-const ListAppoinments = () => {
+const FinishAppointment = () => {
     const [filter, setfilter] = useState('')
     const [appointments, setAppointments] = useState([])
 
@@ -55,4 +55,4 @@ const ListAppoinments = () => {
     );
 };
 
-export default ListAppoinments;
+export default FinishAppointment;
