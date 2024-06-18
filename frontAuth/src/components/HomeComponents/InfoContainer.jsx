@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { CiMedicalClipboard, CiMedicalCross } from "react-icons/ci";
+import { GoHistory } from "react-icons/go";
 import { SiReacthookform } from "react-icons/si";
 import RoleBasedComponent from '../../protected/RoleBasedComponent';
 
@@ -56,7 +57,7 @@ const InfoContainer = ({ name = 'name', email = 'email@gmail.com' }) => {
                         <RoleBasedComponent allowedRoles={['PCTE']} userRoles={roles}>
                             <Link to='/history'>
                                 <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500 bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer'>
-                                    Historial <SiReacthookform className='font-extrabold text-3xl' />
+                                    Historial <GoHistory className='font-extrabold text-3xl' />
                                 </li>
 
                             </Link>
