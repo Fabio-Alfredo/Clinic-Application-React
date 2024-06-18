@@ -30,7 +30,7 @@ const InfoContainer = ({ name = 'name', email = 'email@gmail.com' }) => {
                     </div>
                 </div>
                 <div className='w-[320px] xs:w-[360px] h-fit md:w-[700px] p-x8 md:px-12'>
-                    <lu className='flex gap-6 justify-center group-item:' >
+                    <ul className='flex gap-6 justify-center group-item:' >
                         <Link to='/create/appointment'>
                             <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500 bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer' >
                                 Crear cita  <CiMedicalClipboard className='font-bold text-3xl' />
@@ -47,7 +47,7 @@ const InfoContainer = ({ name = 'name', email = 'email@gmail.com' }) => {
                             </li>
 
                         </Link>
-                    </lu>
+                    </ul>
 
                 </div>
 

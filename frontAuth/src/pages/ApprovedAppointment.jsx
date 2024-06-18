@@ -39,23 +39,39 @@ const ApprovedAppointment = () => {
     };
 
     const handleModalAction = async (data) => {
-        const res = await approvedAppointment(data);
-        Swal.fire({
-            title: "Exitoso!",
-            text: `${res.message}`,
-            icon: "success",
-        })
-        getAppointments();
+        try {
+            const res = await approvedAppointment(data);
+            Swal.fire({
+                title: "Exitoso!",
+                text: `${res.message}`,
+                icon: "success",
+            })
+            getAppointments();
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            })
+        }
     };
 
     const handleModalDenied = async (id) => {
-        const res = await deniedAppointment(id);
-        Swal.fire({
-            title: "Exitoso!",
-            text: `${res.message}`,
-            icon: "success",
-        })
-        getAppointments();
+        try {
+            const res = await deniedAppointment(id);
+            Swal.fire({
+                title: "Exitoso!",
+                text: `${res.message}`,
+                icon: "success",
+            })
+            getAppointments();
+        } catch (error) {
+            Swal.fire({
+                title: "Error!",
+                text: `${error.data.message}`,
+                icon: "error",
+            })
+        }
     }
 
     return (

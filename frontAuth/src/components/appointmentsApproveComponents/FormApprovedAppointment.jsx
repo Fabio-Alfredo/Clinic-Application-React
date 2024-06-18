@@ -44,11 +44,23 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
         return formattedDate;
     }
 
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const formattedCurrentTime = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`;
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); 
+    const day = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+
+    const currentDateTime = `${year}-${month}-${day}T${hour}:${minute}`;
+
     const handleDenied = () => {
         onDenied(appointmentId);
         onClose();
     }
-
 
 
     return (
@@ -62,7 +74,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                             type='datetime-local'
                             value={realization}
                             name='realization'
-                            min={new Date().toISOString().split('T')[0]}
+                            min={currentDateTime}
                             onChange={InputChange}
                             className='border rounded p-2 w-full'
                             required
@@ -74,6 +86,7 @@ const FormApprovedAppointment = ({ userId, appointmentId, onClose, onSubmit, onD
                             type='time'
                             name='duration'
                             value={duration}
+                            min={formattedCurrentTime}
                             onChange={InputChange}
                             placeholder=''
                             className='border rounded p-2 w-full'

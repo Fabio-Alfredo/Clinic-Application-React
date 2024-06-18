@@ -2,15 +2,19 @@ import React from 'react';
 import { FaCirclePlus } from "react-icons/fa6";
 import Swal from 'sweetalert2'
 
-const DateHistory = ({setFilter}) => {
+const DateHistory = ({ setFilter }) => {
+
+
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     const handleFilter = async () => {
         const { value: date } = await Swal.fire({
             title: "select departure date",
             input: "date",
             didOpen: () => {
-                const today = (new Date()).toISOString();
-                Swal.getInput().min = today.split("T")[0];
+
+                Swal.getInput().min = today.toISOString().split('T')[0];
             }
         });
         if (date) {

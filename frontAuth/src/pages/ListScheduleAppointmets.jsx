@@ -62,7 +62,7 @@ const ListScheduleAppointmets = () => {
                         </div>
                     )) : (
                         <div className='overflow-y-auto flex justify-center items-center h-[30vh]  px-4'>
-                            <p className='flex gap-2'>No hay citas disponibles. <IoAlertCircleOutline /></p>
+                            <p className='flex gap-2'>No hay citas disponibles para ahora. <IoAlertCircleOutline /></p>
                         </div>
                     )
                 }
