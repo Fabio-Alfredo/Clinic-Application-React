@@ -6,6 +6,7 @@ import { CiMedicalClipboard, CiMedicalCross } from "react-icons/ci";
 import { GoHistory } from "react-icons/go";
 import { SiReacthookform } from "react-icons/si";
 import RoleBasedComponent from '../../protected/RoleBasedComponent';
+import { BsFileEarmarkMedical } from "react-icons/bs";
 
 const InfoContainer = ({ name = 'name', email = 'email@gmail.com' }) => {
 
@@ -39,18 +40,17 @@ const InfoContainer = ({ name = 'name', email = 'email@gmail.com' }) => {
                             </li>
                         </Link>
                         <RoleBasedComponent allowedRoles={['ASST']} userRoles={roles}>
-                        <Link to='/approved/appointent'>
-                            <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500  bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer'>
-                                Aprobar cita <CiMedicalCross className='font-bold text-3xl' />
-                            </li>
-                        </Link>
+                            <Link to='/approved/appointent'>
+                                <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500  bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer'>
+                                    Aprobar cita <CiMedicalCross className='font-bold text-3xl' />
+                                </li>
+                            </Link>
                         </RoleBasedComponent>
                         <RoleBasedComponent allowedRoles={['DCTR']} userRoles={roles}>
                             <Link to='/create/historic'>
                                 <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500 bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer'>
                                     Crear historial <SiReacthookform className='font-extrabold text-3xl' />
                                 </li>
-
                             </Link>
                         </RoleBasedComponent>
 
@@ -59,7 +59,14 @@ const InfoContainer = ({ name = 'name', email = 'email@gmail.com' }) => {
                                 <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500 bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer'>
                                     Historial <GoHistory className='font-extrabold text-3xl' />
                                 </li>
+                            </Link>
+                        </RoleBasedComponent>
 
+                        <RoleBasedComponent allowedRoles={['DCTR']} userRoles={roles}>
+                            <Link to='/create/prescriptions'>
+                                <li className='h-fit w-44 p-4 flex flex-col justify-center items-center border border-solid border-blue-500 bg-blue-400 rounded-xl text-2xl hover:scale-110 duration-300 cursor-pointer'>
+                                    prescripcion <BsFileEarmarkMedical className='font-extrabold text-3xl' />
+                                </li>
                             </Link>
                         </RoleBasedComponent>
                     </ul>

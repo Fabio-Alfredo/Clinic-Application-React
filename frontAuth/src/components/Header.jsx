@@ -13,6 +13,13 @@ const Header = () => {
             <h1 className='text-4xl font-bold flex gap-4' >Clinica <FaHandHoldingMedical /></h1>
             <div>
                 <ul className='flex gap-10 text-2xl'>
+
+                    <RoleBasedComponent allowedRoles={['DCTR']} userRoles={roles}>
+                        <Link to='/finish/appointment'>
+                            <li className='hover:scale-110 duration-300 cursor-pointer'> Finalizar Cita</li>
+                        </Link>
+                    </RoleBasedComponent>
+
                     <RoleBasedComponent allowedRoles={['PCTE']} userRoles={roles}>
                         <Link to='/appointments'>
                             <li className='hover:scale-110 duration-300 cursor-pointer'  >Ver citas</li>
@@ -31,7 +38,11 @@ const Header = () => {
                         </Link>
                     </RoleBasedComponent>
 
-                    <li className='hover:scale-110 duration-300 cursor-pointer'> otra</li>
+                    <RoleBasedComponent allowedRoles={['ADMN']} userRoles={roles}>
+                        <Link to='/changerol'>
+                            <li className='hover:scale-110 duration-300 cursor-pointer'> Cambiar rol</li>
+                        </Link>
+                    </RoleBasedComponent>
                 </ul>
             </div>
         </div>

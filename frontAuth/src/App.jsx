@@ -12,6 +12,9 @@ import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext"
 import ProtectedRoute from "./protected/ProtectedRoute"
 import CreateHistoric from "./pages/CreateHistoric"
+import ChangeRole from "./pages/ChangeRole"
+import NewPrescription from "./pages/NewPrescription"
+import FinishAppointment from "./pages/FinishAppointment" 
 
 const App = () => {
 
@@ -53,6 +56,11 @@ const App = () => {
             <Route path="/prescriptions" element={<ListPrescription />} />
           </Route>
 
+          {/* ruta 6 */}
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['ADMN']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/changerol" element={<ChangeRole />} />
+          </Route>
+
           {/* ruta 7 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR', 'ASST']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/create/historic" element={<CreateHistoric />} />
@@ -61,6 +69,16 @@ const App = () => {
           {/* ruta 8 */}
           <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['PCTE']} userRoles={roles} redirectPath="/Home" />} >
             <Route path="/history" element={<RecordUser />} />
+          </Route>
+
+          {/* ruta 9 */}
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/create/prescriptions" element={<NewPrescription />} />
+          </Route>
+
+          {/* ruta 10 */}
+          <Route element={<ProtectedRoute canActivate={token} RequiredRoles={['DCTR']} userRoles={roles} redirectPath="/Home" />} >
+            <Route path="/finish/appointment" element={<FinishAppointment />} />
           </Route>
 
         </Routes>
