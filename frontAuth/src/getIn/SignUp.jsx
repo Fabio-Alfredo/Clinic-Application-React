@@ -39,7 +39,6 @@ const SignUp = () => {
 
             return
         }
-
         try {
             const res = await register(formData)
             userRegister();

@@ -26,7 +26,7 @@ const Header = () => {
                         </Link>
                     </RoleBasedComponent>
 
-                    <RoleBasedComponent allowedRoles={['PCTE']} userRoles={roles}>
+                    <RoleBasedComponent allowedRoles={['DCTR']} userRoles={roles}>
                         <Link to='/schedule'>
                             <li className='hover:scale-110 duration-300 cursor-pointer'> Cronograma</li>
                         </Link>

@@ -30,8 +30,3 @@ const Home = () => {
 };
 
 export default Home;
-
-{/* <h1>Home</h1>
-            <RoleBasedComponent allowedRoles={['DCTR']} userRoles={roles}>
-                <p onClick={userAppointmets}>navegar</p>
-            </RoleBasedComponent> */}
