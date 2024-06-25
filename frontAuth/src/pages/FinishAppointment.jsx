@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 
 const FinishAppointment = () => {
     const [filter, setfilter] = useState('')
+    const [idAppointment, setIdAppointment] = useState('')
     const [appointments, setAppointments] = useState([])
 
     const fetchAppointments = async () => {
@@ -30,7 +31,10 @@ const FinishAppointment = () => {
         fetchAppointments()
     }, [filter])
 
-    const handleAppointmentClick = (id) => {
+    const handleAppointmentClick = () => {
+
+        const id = idAppointment;
+
         Swal.fire({
             title: "Do you want to save the changes?",
             showDenyButton: true,
@@ -69,7 +73,9 @@ const FinishAppointment = () => {
                     <div className='overflow-y-auto h-[35vh] md:h-[50vh] px-4'>
                         {
                             appointments.map(appointment => (
+                                <div key={id.appointment} onClick={() => setIdAppointment(...idAppointment, idAppointment)}> 
                                 <PacientCard key={appointment.id} handleClick={handleAppointmentClick} idAppointment={appointment.id} reason={appointment.reason} phase={appointment.status} date={appointment.realization} />
+                                </div>
                             ))
                         }
                     </div>
